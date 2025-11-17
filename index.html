@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pollen – Peer Career Help</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="logo">Pollen</div>
+      <nav class="nav-links">
+        <a href="#explore" class="nav-link">Explore</a>
+        <a href="#categories" class="nav-link">Categories</a>
+        <a href="#sessions" class="nav-link">My Sessions</a>
+        <a href="#profile" class="nav-link">Profile</a>
+      </nav>
+      <button class="btn btn-primary" id="nav-post-service">Post a Service</button>
+    </div>
+  </header>
+
+  <!-- HERO / HOME -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <h1>Peer-to-Peer Career Help for Students 🚀</h1>
+      <p class="hero-subtitle">
+        From interview prep to resume reviews — learn directly from experienced peers who’ve been there before.
+      </p>
+
+      <!-- SEARCH -->
+      <form id="search-form" class="search-bar">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search for interview prep, resume reviews, career coaching..."
+          aria-label="Search services"
+        />
+        <button type="submit" class="search-button">
+          🔍
+        </button>
+      </form>
+
+      <!-- QUICK CATEGORY PILL BUTTONS -->
+      <div class="quick-categories">
+        <button class="quick-pill" data-category="Interview Prep">
+          <span class="pill-icon">💼</span>
+          <span>Interview Prep</span>
+        </button>
+        <button class="quick-pill" data-category="Resume Review">
+          <span class="pill-icon">📄</span>
+          <span>Resume Reviews</span>
+        </button>
+        <button class="quick-pill" data-category="Mock Interview">
+          <span class="pill-icon">🎤</span>
+          <span>Mock Interviews</span>
+        </button>
+        <button class="quick-pill" data-category="Career Guidance">
+          <span class="pill-icon">⭐</span>
+          <span>Career Guidance</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED SERVICES -->
+  <section class="section" id="featured">
+    <div class="section-inner">
+      <h2>Featured Career Services</h2>
+      <div class="card-grid" id="featured-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPLORE SECTION -->
+  <section class="section section-alt" id="explore">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2>Explore All Services</h2>
+        <div class="toolbar">
+          <select id="filter-category">
+            <option value="all">All Categories</option>
+            <option value="Interview Prep">Interview Prep</option>
+            <option value="Resume Review">Resume Reviews</option>
+            <option value="Mock Interview">Mock Interviews</option>
+            <option value="Career Guidance">Career Guidance</option>
+          </select>
+          <select id="sort-services">
+            <option value="featured">Sort: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating-desc">Rating: High to Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="card-grid" id="explore-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES SECTION -->
+  <section class="section" id="categories">
+    <div class="section-inner">
+      <h2>Categories</h2>
+      <p class="section-description">
+        Browse by the type of support you need from GT students and peer mentors.
+      </p>
+      <div class="category-grid">
+        <div class="category-card" data-category="Interview Prep">
+          <h3>Interview Prep</h3>
+          <p>Targeted prep for company, role, and behavioral interviews.</p>
+          <button class="btn-link category-filter-btn">View Services →</button>
+        </div>
+        <div class="category-card" data-category="Resume Review">
+          <h3>Resume Reviews</h3>
+          <p>Polish your resume with feedback from students who’ve already landed offers.</p>
+          <button class="btn-link category-filter-btn">View Services →</button>
+        </div>
+        <div class="category-card" data-category="Mock Interview">
+          <h3>Mock Interviews</h3>
+          <p>Practice with peers who’ve passed similar interviews and get concrete feedback.</p>
+          <button class="btn-link category-filter-btn">View Services →</button>
+        </div>
+        <div class="category-card" data-category="Career Guidance">
+          <h3>Career Guidance</h3>
+          <p>Plan internships, grad school, and long-term goals with peer mentors.</p>
+          <button class="btn-link category-filter-btn">View Services →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE DETAIL (shown when clicking a card) -->
+  <section class="section section-alt hidden" id="service-detail">
+    <div class="section-inner">
+      <div class="detail-layout">
+        <div class="detail-main">
+          <p class="back-link" id="close-detail">← Back to services</p>
+          <h2 id="detail-title"></h2>
+          <p class="detail-meta">
+            by <span id="detail-mentor"></span> · <span id="detail-category"></span>
+          </p>
+          <p class="detail-rating">
+            ⭐ <span id="detail-rating"></span> · <span id="detail-price"></span>
+          </p>
+          <p id="detail-description" class="detail-description"></p>
+        </div>
+        <div class="detail-side">
+          <div class="detail-card">
+            <h3>Book a Session</h3>
+            <label for="detail-date">Preferred Date</label>
+            <input type="date" id="detail-date" />
+            <label for="detail-time">Preferred Time</label>
+            <input type="time" id="detail-time" />
+            <button class="btn btn-primary" id="book-session-btn">Book Session</button>
+            <p class="detail-note">
+              Your booking will appear under <strong>My Sessions</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MY SESSIONS -->
+  <section class="section" id="sessions">
+    <div class="section-inner">
+      <h2>My Sessions</h2>
+      <p class="section-description">
+        Track upcoming meetings with your peer mentors and review past sessions.
+      </p>
+
+      <div class="sessions-layout">
+        <div>
+          <h3>Upcoming Sessions</h3>
+          <ul class="session-list" id="upcoming-sessions">
+            <!-- JS -->
+          </ul>
+        </div>
+        <div>
+          <h3>Past Sessions</h3>
+          <ul class="session-list" id="past-sessions">
+            <!-- JS -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="section section-alt" id="profile">
+    <div class="section-inner profile-layout">
+      <div class="profile-main">
+        <div class="profile-header">
+          <div class="profile-avatar">JS</div>
+          <div>
+            <h2>Jyo Sompalli</h2>
+            <p class="profile-subtitle">GT CS Student · Peer Career Mentor</p>
+          </div>
+        </div>
+        <p class="profile-bio">
+          I’m a Georgia Tech CS student who has gone through tech interviews, internship
+          recruiting, and resume cycles. On Pollen, I help other students prepare for
+          interviews, polish their applications, and plan their paths.
+        </p>
+      </div>
+      <div class="profile-side">
+        <h3>Services Offered</h3>
+        <ul class="profile-services" id="profile-services">
+          <!-- Filled with featured services where mentor is current user, for demo just static -->
+          <li>Amazon Interview Prep – 60 min</li>
+          <li>Tech Resume Review – 30 min</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- POST A SERVICE -->
+  <section class="section" id="post-service">
+    <div class="section-inner">
+      <h2>Post a Service</h2>
+      <p class="section-description">
+        Offer your own coaching sessions to other students. New services appear instantly in
+        Explore (and optionally Featured).
+      </p>
+
+      <form id="post-service-form" class="form-grid">
+        <div class="form-field">
+          <label for="service-title">Service Title</label>
+          <input type="text" id="service-title" required placeholder="e.g., FAANG Behavioral Prep" />
+        </div>
+        <div class="form-field">
+          <label for="service-mentor">Your Name</label>
+          <input type="text" id="service-mentor" required placeholder="e.g., Emily R." />
+        </div>
+        <div class="form-field">
+          <label for="service-category">Category</label>
+          <select id="service-category" required>
+            <option value="">Select a category</option>
+            <option value="Interview Prep">Interview Prep</option>
+            <option value="Resume Review">Resume Reviews</option>
+            <option value="Mock Interview">Mock Interviews</option>
+            <option value="Career Guidance">Career Guidance</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="service-price">Price (USD)</label>
+          <input type="number" id="service-price" min="0" required placeholder="30" />
+        </div>
+        <div class="form-field">
+          <label for="service-rating">Rating (0–5, optional)</label>
+          <input type="number" id="service-rating" min="0" max="5" step="0.1" placeholder="5.0" />
+        </div>
+        <div class="form-field form-field-full">
+          <label for="service-description">Description</label>
+          <textarea id="service-description" rows="3" required placeholder="Describe what students will get from this session."></textarea>
+        </div>
+        <div class="form-field form-checkbox">
+          <input type="checkbox" id="service-featured" />
+          <label for="service-featured">Show this service as Featured</label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Create Service</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- BUSINESS MODEL CANVAS -->
+  <section class="section section-alt" id="business-canvas">
+    <div class="section-inner">
+      <h2>Business Model Canvas</h2>
+      <p class="section-description">
+        Internal view of how Pollen creates, delivers, and captures value for college students.
+      </p>
+      <div class="canvas-grid">
+        <div class="canvas-block">
+          <h3>Key Partners</h3>
+          <ul>
+            <li>Universities / Career Centers</li>
+            <li>Student Organizations &amp; Campus Ambassadors</li>
+            <li>Payment and ID Verification Providers</li>
+            <li>Social Media &amp; Marketing Platforms</li>
+            <li>Career and EdTech Integrations</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Key Activities</h3>
+          <ul>
+            <li>Recruiting and vetting experienced student mentors</li>
+            <li>Collecting feedback and improving user experience</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Value Propositions</h3>
+          <ul>
+            <li>Affordable peer-based coaching</li>
+            <li>Real-world advice from students who’ve succeeded in similar interviews</li>
+            <li>Convenient and flexible scheduling</li>
+            <li>Helpful mock interviews</li>
+            <li>Resume optimization from peers who’ve already landed offers</li>
+            <li>Opportunities for experienced students to earn money and share expertise</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Customer Relationships</h3>
+          <ul>
+            <li>Connect students with mentors</li>
+            <li>Help schedule meetings and keep contact</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Customer Segments</h3>
+          <ul>
+            <li>College students as customers</li>
+            <li>College students as sellers / mentors</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Key Resources</h3>
+          <ul>
+            <li>Platform, trust &amp; verification systems, payment infrastructure</li>
+            <li>Partnership management resources, ambassador network</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Channels</h3>
+          <ul>
+            <li>Online platform only – no physical product</li>
+            <li>Social and digital outreach to students</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Cost Structure</h3>
+          <ul>
+            <li>Marketing and creating the platform</li>
+            <li>Integrating features and handling transactions</li>
+          </ul>
+        </div>
+        <div class="canvas-block">
+          <h3>Revenue Streams</h3>
+          <ul>
+            <li>Services priced around $30 per session</li>
+            <li>Competing interview coaching often &gt; $100</li>
+            <li>Online payment processing (e.g., Stripe) instead of personal transfers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© <span id="year"></span> Pollen · Built for peer-to-peer career help.</p>
+      <a href="#home" class="btn-link">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
